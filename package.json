@@ -1,0 +1,17 @@
+{
+	"name": "tablette-maman-api",
+	"version": "1.0.0",
+	"description": "A basic Fastify backend server",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"dev": "nodemon server.js"
+	},
+	"dependencies": {
+		"child_process": "^1.0.2",
+		"fastify": "^4.17.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.13"
+	}
+}
