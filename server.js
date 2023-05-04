@@ -40,7 +40,7 @@ fastify.post("/delete", async (request, reply) => {
 	}
 
 	// Spawn a new child process to run the Ansible playbook
-	const ansible = spawn("ansible-playbook", ["../deploylinode.yml", "--extra-vars", `linode_label=${linode_label}`]);
+	const ansible = spawn("ansible-playbook", ["../deletelinode.yml", "--extra-vars", `linode_label=${linode_label}`]);
 
 	// Log the output of the child process to the console
 	ansible.stdout.on("data", (data) => {
