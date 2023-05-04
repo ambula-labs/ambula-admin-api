@@ -8,6 +8,7 @@
 		"dev": "nodemon server.js"
 	},
 	"dependencies": {
+		"@fastify/formbody": "^7.4.0",
 		"child_process": "^1.0.2",
 		"fastify": "^4.17.0"
 	},
