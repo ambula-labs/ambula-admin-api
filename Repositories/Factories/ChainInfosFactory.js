@@ -1,7 +1,7 @@
 import ChainInfos from "../../Models/ChainInfos.js";
 
 export default function fromDatabaseResult(data) {
-	if (!data || !data.id || !data.status || !(data.dateStatusChanged instanceof Date)) {
+	if (!data || !data.id || !data.status || !data.dateStatusChanged) {
 		throw new Error("Invalid data");
 	}
 
