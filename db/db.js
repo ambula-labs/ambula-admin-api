@@ -1,4 +1,5 @@
 import { createConnection } from "mysql";
+import { promisify } from "util";
 
 const connection = createConnection({
 	host: "localhost",
