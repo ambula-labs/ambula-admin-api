@@ -11,4 +11,20 @@ const pool = createPool({
 
 const query = promisify(pool.query).bind(pool);
 
+// Function to gracefully close the pool
+function closePool() {
+	pool.end((err) => {
+		if (err) {
+			console.error("Error closing the database connection pool:", err);
+		} else {
+			console.log("Database connection pool closed.");
+		}
+	});
+}
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (err) => {
+	console.error("Unhandled Promise rejection:", err);
+});
+
 export default query;
