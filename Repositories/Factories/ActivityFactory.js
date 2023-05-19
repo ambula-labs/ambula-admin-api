@@ -1,18 +1,19 @@
 import Activity from "../../Models/Activity.js";
 
 export default function fromDatabaseResult(data) {
-	if (!data || !data.id || !data.message || !data.date) {
+	if (!data || !data.id || !data.message || !(data.date instanceof Date)) {
 		throw new Error("Invalid data");
 	}
 
 	const { id, message, date } = data;
-	const parsedDate = new Date(date); // Parse the date string
 
-	return new Activity(id, message, parsedDate);
+	return new Activity(id, message, date);
 }
 
-export function* listingFromDatabaseResults(items) {
+export function listingFromDatabaseResults(items) {
+	const results = [];
 	for (const item of items) {
-		yield fromDatabaseResult(item);
+		results.push(fromDatabaseResult(item));
 	}
+	return results;
 }

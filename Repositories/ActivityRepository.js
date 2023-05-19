@@ -6,7 +6,7 @@ export default async function listingActivities() {
 		const sql = "SELECT * FROM activities ORDER BY date DESC";
 		const rows = await query(sql);
 
-		return Array.from(listingFromDatabaseResults(rows));
+		return listingFromDatabaseResults(rows);
 	} catch (err) {
 		throw new Error(`Failed to fetch activities from the database: ${err}`);
 	}
