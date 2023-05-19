@@ -1,12 +1,14 @@
 import fastify from "fastify";
 import formBody from "@fastify/formbody";
+import activitiesRoute from "./Routes/Activities.js";
+import chainInfosRoute from "./Routes/ChainInfos.js";
+import { spawn } from "child_process";
 
 const app = fastify();
 app.register(formBody);
-import { spawn } from "child_process";
 
-import activitiesRoute from "./Routes/Activities.js";
 app.register(activitiesRoute, { prefix: "/activities" });
+app.register(chainInfosRoute, { prefix: "/chain-infos" });
 
 app.get("/", async (request, reply) => {
 	// Health check
