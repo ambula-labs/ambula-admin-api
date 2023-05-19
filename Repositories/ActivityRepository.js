@@ -1,5 +1,5 @@
 import query from "../db/db.js";
-import listingFromDatabaseResults from "./Factories/ActivityFactory.js";
+import { listingFromDatabaseResults } from "./Factories/ActivityFactory.js";
 
 export default async function listingActivities() {
 	try {
