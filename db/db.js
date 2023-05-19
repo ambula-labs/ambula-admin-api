@@ -30,6 +30,12 @@ function closePool() {
 	});
 }
 
+// Handle the exit event
+process.on("exit", () => {
+	// Close the database pool
+	closePool();
+});
+
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {
 	console.error("Unhandled Promise rejection:", err);

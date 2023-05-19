@@ -2,10 +2,13 @@ import Activity from "../../Models/Activity.js";
 
 export default function fromDatabaseResult(data) {
 	if (!data || !data.id || !data.message || !data.date) {
-		throw new Error("Invalid user data");
+		throw new Error("Invalid data");
 	}
 
-	return new Activity(data.id, data.message, data.date);
+	const { id, message, date } = data;
+	const parsedDate = new Date(date); // Parse the date string
+
+	return new Activity(id, message, parsedDate);
 }
 
 export function* listingFromDatabaseResults(items) {
