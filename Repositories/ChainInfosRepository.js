@@ -6,7 +6,7 @@ export default async function getChainInfos() {
 		const sql = "SELECT * FROM chain_infos WHERE id=1";
 		const rows = await query(sql);
 
-		return fromDatabaseResult(rows);
+		return fromDatabaseResult(rows[0]);
 	} catch (err) {
 		throw new Error(`Failed to fetch chain_infos from the database: ${err}`);
 	}
