@@ -2,9 +2,9 @@ import { createPool } from "mysql";
 import { promisify } from "util";
 
 const pool = createPool({
-	host: "127.0.0.1",
+	host: "192.168.0.100",
 	port: 3306,
-	user: "root",
+	user: "ambula_user",
 	password: "Ambula@123!",
 	database: "ambuladb",
 });
