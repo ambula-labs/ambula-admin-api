@@ -58,6 +58,25 @@ fastify.post("/delete", async (request, reply) => {
 	});
 });
 
+fastify.get("/stream-logs", { websocket: true }, (connection) => {
+	let messageCount = 0;
+	const intervalId = setInterval(() => {
+		const message = `Log message ${messageCount}`;
+		connection.socket.send(JSON.stringify({ message }));
+		messageCount++;
+
+		// Stop sending messages after 10 iterations
+		if (messageCount === 10) {
+			clearInterval(intervalId);
+			connection.socket.close();
+		}
+	}, 1000);
+
+	connection.socket.on("close", () => {
+		clearInterval(intervalId);
+	});
+});
+
 // Start the server on port 3000
 fastify.listen({ port: 3000, host: "0.0.0.0" }, (err, address) => {
 	if (err) {
