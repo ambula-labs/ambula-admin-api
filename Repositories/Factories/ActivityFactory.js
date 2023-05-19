@@ -1,6 +1,6 @@
 import Activity from "../../Models/Activity.js";
 
-export function fromDatabaseResult(data) {
+export default function fromDatabaseResult(data) {
 	if (!data || !data.id || !data.message || !data.date) {
 		throw new Error("Invalid user data");
 	}
