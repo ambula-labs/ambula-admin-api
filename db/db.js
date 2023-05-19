@@ -9,7 +9,15 @@ const pool = createPool({
 	database: "ambuladb",
 });
 
-const query = promisify(pool.query).bind(pool);
+const query = async (sql) => {
+	try {
+		const result = await promisify(pool.query).call(pool, sql);
+		return result;
+	} catch (err) {
+		console.error("Failed to fetch activities from the database:", err);
+		throw err;
+	}
+};
 
 // Function to gracefully close the pool
 function closePool() {
