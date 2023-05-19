@@ -1,12 +1,11 @@
-import { createPool } from "mysql";
-import { promisify } from "util";
+import { createConnection } from "mysql";
 
-const pool = createPool({
+const connection = createConnection({
 	host: "localhost",
 	user: "root",
 	database: "ambuladb",
 });
 
-const query = promisify(pool.query).bind(pool);
+const query = promisify(connection.query).bind(connection);
 
 export default query;
