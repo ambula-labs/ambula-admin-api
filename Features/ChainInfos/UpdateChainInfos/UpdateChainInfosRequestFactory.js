@@ -8,8 +8,6 @@ class UpdateChainInfosRequestFactory {
 			throw new Error("Missing required parameters");
 		}
 
-		// Additional validation logic if needed
-
 		return new UpdateChainInfosRequest(status);
 	}
 }

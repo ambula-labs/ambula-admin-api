@@ -11,3 +11,15 @@ export default async function listingActivities() {
 		throw new Error(`Failed to fetch activities from the database: ${err}`);
 	}
 }
+
+export async function insertActivity(insertReq) {
+	try {
+		const date = insertReq.date.toISOString().slice(0, 19).replace("T", " ");
+		const escapedMessage = insertReq.message.replace(/'/g, "''"); // Escape single quotes
+		const sql = `INSERT INTO activities (message, date) VALUES ("${escapedMessage}", "${date}");`;
+		const result = await query(sql);
+		return result.insertId;
+	} catch (err) {
+		throw new Error(`Failed to insert activity into the database: ${err}`);
+	}
+}

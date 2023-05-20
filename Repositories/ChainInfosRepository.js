@@ -15,13 +15,10 @@ export default async function getChainInfos() {
 
 export async function updateChainInfos(updateReq) {
 	try {
-		const currentDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+		const currentDate = updateReq.date.toISOString().slice(0, 19).replace("T", " ");
 		const sql = `UPDATE chain_infos SET status = ${updateReq.status}, dateStatusChanged = '${currentDate}' WHERE id = 1`;
-
-		const rows = await query(sql);
-
-		return new ChainInfos(1, updateReq.status, currentDate);
+		await query(sql);
 	} catch (err) {
-		throw new Error(`Failed to fetch chain_infos from the database: ${err}`);
+		throw new Error(`Failed to update chain_infos from the database: ${err}`);
 	}
 }
