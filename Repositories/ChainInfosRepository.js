@@ -14,7 +14,8 @@ export default async function getChainInfos() {
 
 export async function updateChainInfos(updateReq) {
 	try {
-		const sql = "UPDATE chain_infos SET status = ${status}, dateStatusChanged = '${new Date()}' WHERE id=1;";
+		const currentDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+		const sql = `UPDATE chain_infos SET status = ${updateReq.status}, dateStatusChanged = '${currentDate}' WHERE id = 1`;
 
 		const rows = await query(sql);
 

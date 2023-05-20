@@ -14,4 +14,4 @@ class UpdateChainInfosRequestFactory {
 	}
 }
 
-export default new UpdateChainInfosRequestFactory();
+export default UpdateChainInfosRequestFactory;
