@@ -15,7 +15,8 @@ export default async function listingActivities() {
 export async function insertActivity(insertReq) {
 	try {
 		const date = insertReq.date.toISOString().slice(0, 19).replace("T", " ");
-		const sql = `INSERT INTO activities (message, date) VALUES (${insertReq.status}, ${date});`;
+		const escapedMessage = message.replace(/'/g, "''"); // Escape single quotes
+		const sql = `INSERT INTO activities (message, date) VALUES (${escapedMessage}, ${date});`;
 		return await query(sql);
 	} catch (err) {
 		throw new Error(`Failed to insert activity into the database: ${err}`);
