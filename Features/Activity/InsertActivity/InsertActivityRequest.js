@@ -1,8 +1,8 @@
-class UpdateChainInfosRequest {
-	constructor(status) {
-		this.status = status;
+class InsertActivityRequest {
+	constructor(message) {
+		this.message = message;
 		this.date = new Date();
 	}
 }
 
-export default UpdateChainInfosRequest;
+export default InsertActivityRequest;
