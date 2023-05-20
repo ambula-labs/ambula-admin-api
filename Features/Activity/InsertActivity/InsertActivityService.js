@@ -1,4 +1,5 @@
 import { insertActivity } from "../../../Repositories/ActivityRepository.js";
+import Activity from "../../../Models/Activity.js";
 
 async function handle(insertReq) {
 	const id = await insertActivity(insertReq);
