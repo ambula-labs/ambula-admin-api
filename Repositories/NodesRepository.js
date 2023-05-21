@@ -48,8 +48,8 @@ export async function updateNode(updateReq) {
 			.map((key) => `${key} = "${updateReq[key]}"`)
 			.join(", ");
 
-		updateColumns.dateStatusChanged = updateColumns.dateStatusChanged.toISOString().slice(0, 19).replace("T", " ");
-		const sql = `UPDATE nodes SET ${updateColumns} WHERE id = ${updateReq.id}`;
+		dateStatusChanged = new Date().toISOString().slice(0, 19).replace("T", " ");
+		const sql = `UPDATE nodes SET ${updateColumns}, dateStatusChanged = '${dateStatusChanged}'  WHERE id = ${updateReq.id}`;
 		await query(sql);
 	} catch (err) {
 		throw new Error(`Failed to update node : ${err}`);
