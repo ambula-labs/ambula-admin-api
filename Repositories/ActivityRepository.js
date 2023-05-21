@@ -3,15 +3,15 @@ import { listingFromDatabaseResults } from "./Factories/ActivityFactory.js";
 
 export default async function listingActivities(req) {
 	try {
-		let sql = "SELECT * FROM activities ORDER BY date DESC";
+		const { offset, limit } = request.query;
 
-		if (Number.isInteger(req.limit) && req.limit > 0) {
-			sql += ` LIMIT ${req.limit}`;
-		}
+		// Validate offset and limit values
+		const validatedOffset = Number.isInteger(offset) && offset >= 0 ? parseInt(offset) : 0;
+		const validatedLimit = Number.isInteger(limit) && limit > 0 ? parseInt(limit) : 10;
 
-		if (Number.isInteger(req.offset) && req.offset >= 0) {
-			sql += ` OFFSET ${req.offset}`;
-		}
+		// Use the validated offset and limit in your SQL query
+		const sql = `SELECT * FROM activities ORDER BY date DESC LIMIT ${validatedLimit} OFFSET ${validatedOffset}`;
+
 		const rows = await query(sql);
 
 		return listingFromDatabaseResults(rows);
