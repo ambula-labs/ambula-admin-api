@@ -1,9 +1,17 @@
 import query from "../db/db.js";
 import { listingFromDatabaseResults } from "./Factories/ActivityFactory.js";
 
-export default async function listingActivities() {
+export default async function listingActivities(req) {
 	try {
-		const sql = "SELECT * FROM activities ORDER BY date DESC";
+		const { offset, limit } = req.query;
+
+		// Validate offset and limit values
+		const validatedOffset = Number.isInteger(offset) && offset >= 0 ? parseInt(offset) : 0;
+		const validatedLimit = Number.isInteger(parseInt(limit)) && parseInt(limit) > 0 ? parseInt(limit) : 10;
+
+		// Use the validated offset and limit in your SQL query
+		const sql = `SELECT * FROM activities ORDER BY date DESC LIMIT ${validatedLimit} OFFSET ${validatedOffset}`;
+
 		const rows = await query(sql);
 
 		return listingFromDatabaseResults(rows);
