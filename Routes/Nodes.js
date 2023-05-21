@@ -5,13 +5,6 @@ import listingNodeController from "../Features/Nodes/ListingNodes/ListingNodesCo
 import deleteNodeController from "../Features/Nodes/DeleteNode/DeleteNodeController.js";
 
 async function nodesRoute(fastify, options) {
-	fastify.get("/", async (request, reply) => {
-		await listingNodeController(request, reply);
-	});
-	fastify.post("/", async (request, reply) => {
-		await insertNodeController(request, reply);
-	});
-
 	fastify.get("/:node_id", async (request, reply) => {
 		await getNodeController(request, reply);
 	});
@@ -20,6 +13,13 @@ async function nodesRoute(fastify, options) {
 	});
 	fastify.delete("/:node_id", async (request, reply) => {
 		await deleteNodeController(request, reply);
+	});
+
+	fastify.get("/", async (request, reply) => {
+		await listingNodeController(request, reply);
+	});
+	fastify.post("/", async (request, reply) => {
+		await insertNodeController(request, reply);
 	});
 }
 
