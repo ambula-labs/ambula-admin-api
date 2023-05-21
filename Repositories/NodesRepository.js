@@ -24,7 +24,7 @@ export async function getNode(id) {
 	try {
 		const sql = `SELECT * FROM nodes WHERE id = '${id}'`;
 		const rows = await query(sql);
-		return fromDatabaseResult(rows);
+		return fromDatabaseResult(rows[0]);
 	} catch (err) {
 		throw new Error(`Failed to fetch node ${id} from the database: ${err}`);
 	}
