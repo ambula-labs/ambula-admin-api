@@ -7,7 +7,7 @@ export default async function listingActivities(req) {
 
 		// Validate offset and limit values
 		const validatedOffset = Number.isInteger(offset) && offset >= 0 ? parseInt(offset) : 0;
-		const validatedLimit = Number.isInteger(limit) && limit > 0 ? parseInt(limit) : 10;
+		const validatedLimit = Number.isInteger(parseInt(limit)) && parseInt(limit) > 0 ? parseInt(limit) : 10;
 
 		// Use the validated offset and limit in your SQL query
 		const sql = `SELECT * FROM activities ORDER BY date DESC LIMIT ${validatedLimit} OFFSET ${validatedOffset}`;
