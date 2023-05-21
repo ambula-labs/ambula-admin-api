@@ -3,7 +3,7 @@ import { listingFromDatabaseResults } from "./Factories/ActivityFactory.js";
 
 export default async function listingActivities(req) {
 	try {
-		const { offset, limit } = request.query;
+		const { offset, limit } = req.query;
 
 		// Validate offset and limit values
 		const validatedOffset = Number.isInteger(offset) && offset >= 0 ? parseInt(offset) : 0;
