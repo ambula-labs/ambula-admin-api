@@ -7,6 +7,20 @@ import { spawn } from "child_process";
 const app = fastify();
 app.register(formBody);
 
+app.addHook("onRequest", (request, reply, done) => {
+	// Set CORS headers
+	reply.header("Access-Control-Allow-Origin", "*");
+	reply.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+	reply.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+	// Handle preflight requests
+	if (request.method === "OPTIONS") {
+		reply.code(200).send();
+	} else {
+		done();
+	}
+});
+
 app.register(activitiesRoute, { prefix: "/activities" });
 app.register(chainInfosRoute, { prefix: "/chain-infos" });
 
