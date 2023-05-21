@@ -1,5 +1,4 @@
 import query from "../db/db.js";
-import ChainInfos from "../Models/ChainInfos.js";
 import fromDatabaseResult from "./Factories/ChainInfosFactory.js";
 
 export default async function getChainInfos() {
