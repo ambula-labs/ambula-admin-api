@@ -1,4 +1,4 @@
-import InsertActivityRequest from "./InsertActivityRequest.js";
+import LisitingActivityRequest from "./LisitingActivityRequest.js";
 
 class InsertActivityRequestFactory {
 	static createInsertActivityRequest(req) {
@@ -8,8 +8,8 @@ class InsertActivityRequestFactory {
 			throw new Error("Missing required parameters");
 		}
 
-		return new InsertActivityRequest(message);
+		return new LisitingActivityRequest(message);
 	}
 }
 
-export default InsertActivityRequestFactory;
+export default ListingActivityRequestFactory;
