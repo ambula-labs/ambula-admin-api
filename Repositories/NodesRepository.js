@@ -1,5 +1,6 @@
 import query from "../db/db.js";
-import { fromDatabaseResult, listingFromDatabaseResults } from "./Factories/NodesFactory.js";
+import fromDatabaseResult from "./Factories/NodesFactory.js";
+import { listingFromDatabaseResults } from "./Factories/NodesFactory.js";
 
 export default async function listingNodes(req) {
 	try {

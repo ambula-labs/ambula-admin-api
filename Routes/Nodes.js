@@ -1,7 +1,7 @@
 import getNodeController from "../Features/Nodes/GetNode/GetNodeController.js";
 import updateNodeController from "../Features/Nodes/UpdateNode/UpdateNodeController.js";
 import insertNodeController from "../Features/Nodes/InsertNode/InsertNodeController.js";
-import listingNodeController from "../Features/Nodes/ListingNode/ListingNodeController.js";
+import listingNodeController from "../Features/Nodes/ListingNodes/ListingNodesController.js";
 import deleteNodeController from "../Features/Nodes/DeleteNode/DeleteNodeController.js";
 
 async function nodesRoute(fastify, options) {
