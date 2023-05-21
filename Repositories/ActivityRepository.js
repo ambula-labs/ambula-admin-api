@@ -1,9 +1,17 @@
 import query from "../db/db.js";
 import { listingFromDatabaseResults } from "./Factories/ActivityFactory.js";
 
-export default async function listingActivities() {
+export default async function listingActivities(req) {
 	try {
-		const sql = "SELECT * FROM activities ORDER BY date DESC";
+		let sql = "SELECT * FROM activities ORDER BY date DESC";
+
+		if (Number.isInteger(req.limit) && req.limit > 0) {
+			sql += ` LIMIT ${req.limit}`;
+		}
+
+		if (Number.isInteger(req.offset) && req.offset >= 0) {
+			sql += ` OFFSET ${req.offset}`;
+		}
 		const rows = await query(sql);
 
 		return listingFromDatabaseResults(rows);
