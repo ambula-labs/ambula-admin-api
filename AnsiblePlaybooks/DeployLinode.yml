@@ -3,7 +3,7 @@
   vars:
       instance_label: "{{ 'ambula-' + linode_label }}"
       ansible_python_interpreter: /root/miniconda3/bin/python3
-      root_password: "ambula_pwd" # Set your desired root password
+      root_password: "@Ambula123!" # Set your desired root password
   tasks:
       - name: Create a Linode instance
         linode.cloud.instance:
