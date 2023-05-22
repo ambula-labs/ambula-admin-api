@@ -20,33 +20,33 @@
         debug:
             var: linode_instance.instance.ipv4
 
-      - name: Connect to remote machine via SSH
-          hosts: localhost
-          tasks:
-            - name: Connect to remote machine
-              ansible.builtin.shell:
-                cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{linode_instance.instance.ipv4}}"
+- name: Connect to remote machine via SSH
+  hosts: localhost
+  tasks:
+      - name: Connect to remote machine
+        ansible.builtin.shell:
+            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{linode_instance.instance.ipv4}}"
 
-      - name: Perform actions after SSH connection
-        hosts: localhost
-        gather_facts: false
-        tasks:
-          - name: Install Git
-            ansible.builtin.apt:
-              name: git
-              state: present
-              update_cache: yes
-            become: yes
+- name: Perform actions after SSH connection
+  hosts: localhost
+  gather_facts: false
+  tasks:
+      - name: Install Git
+        ansible.builtin.apt:
+            name: git
+            state: present
+            update_cache: yes
+        become: yes
 
-          - name: Clone the repository
-            ansible.builtin.git:
-              repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
-              dest: "/home/ubuntu/ambula-shell-output-api"
-              clone: yes
-              force: yes
-              version: main
-              accept_hostkey: yes
-              update: yes
-              depth: 1
-            become: yes
-            become_user: ubuntu
+      - name: Clone the repository
+        ansible.builtin.git:
+            repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
+            dest: "/home/ubuntu/ambula-shell-output-api"
+            clone: yes
+            force: yes
+            version: main
+            accept_hostkey: yes
+            update: yes
+            depth: 1
+        become: yes
+        become_user: ubuntu
