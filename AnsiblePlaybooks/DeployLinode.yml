@@ -47,4 +47,5 @@
             update: yes
             depth: 1
         become: yes
-        become_user: ubuntu
+        become_user: root # Change to root or another user with sufficient privileges
+
