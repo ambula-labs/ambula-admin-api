@@ -25,7 +25,7 @@ export default function createLinode(linodeLabel) {
 export async function deleteLinode(linodeLabel) {
 	return new Promise((resolve, reject) => {
 		// Spawn a new child process to run the Ansible playbook
-		const ansible = spawn("ansible-playbook", ["./AnsiblePlaybooks/DeleteLinode.yml", "--extra-vars", `linodeLabel=${linodeLabel}`]);
+		const ansible = spawn("ansible-playbook", ["./AnsiblePlaybooks/DeleteLinode.yml", "--extra-vars", `linode_label=${linodeLabel}`]);
 
 		// Log the output of the child process to the console
 		ansible.stdout.on("data", (data) => {
