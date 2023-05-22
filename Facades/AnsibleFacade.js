@@ -12,10 +12,10 @@ export default function createLinode(linodeLabel) {
 			const output = data.toString();
 			console.log(`stdout: ${output}`);
 
-			// Check if the output contains the linode_ip variable
-			if (output.includes("linode_ip")) {
-				// Extract the linode_ip value from the output
-				const match = output.match(/linode_ip\": \"(.+?)\"/);
+			// Check if the output contains the linode_instance.instance.ipv4 variable
+			if (output.includes("linode_instance.instance.ipv4")) {
+				// Extract the linode_instance.instance.ipv4 value from the output
+				const match = output.match(/linode_instance\.instance\.ipv4\": \"(.+?)\"/);
 				if (match) {
 					linodeIp = match[1];
 				}
@@ -26,7 +26,7 @@ export default function createLinode(linodeLabel) {
 		ansible.on("close", (code) => {
 			console.log(`child process exited with code ${code}`);
 			if (code === 0) {
-				resolve(linodeIp); // Resolve the linode_ip value
+				resolve(linodeIp); // Resolve the linodeIp value
 			} else {
 				reject(new Error(`Ansible playbook failed with exit code ${code}`));
 			}
