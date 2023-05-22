@@ -21,14 +21,14 @@
             var: linode_instance.instance.ipv4
 
 - name: Connect to remote machine via SSH and perform actions
-  hosts: "{{ linode_instance.instance.ipv4[0] }}" # Set the host to the first IP address
+  hosts: all
   gather_facts: false
   vars:
       root_password: "{{ root_password }}" # Pass root_password as an extra variable
   tasks:
       - name: Connect to remote machine
         ansible.builtin.shell:
-            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ linode_instance.instance.ipv4[0] }}"
+            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ hostvars['localhost'].linode_instance.instance.ipv4[0] }}"
         register: ssh_result
 
       - name: Display SSH output
