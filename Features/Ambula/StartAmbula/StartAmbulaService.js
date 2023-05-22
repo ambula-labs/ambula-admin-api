@@ -1,7 +1,8 @@
 import createLinode from "../../../Facades/AnsibleFacade.js";
 
 async function handle(linodeLabel) {
-	return await createLinode(linodeLabel);
+	const code = await createLinode(linodeLabel);
+	return code;
 }
 
 export default handle;

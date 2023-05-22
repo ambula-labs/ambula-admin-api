@@ -6,7 +6,7 @@ async function invoke(req, reply) {
 		return reply.code(400).send("Invalid linodeLabel");
 	}
 
-	code = await handle(linode_label);
+	const code = await handle(linode_label);
 	if (code === 0) {
 		reply.send({ success: true });
 	} else {
