@@ -40,3 +40,7 @@
             depth: 1
         become: yes
         become_user: ubuntu
+
+      - name: Print Linode instance IP address
+        debug:
+            var: linode_instance.instance.ipv4
