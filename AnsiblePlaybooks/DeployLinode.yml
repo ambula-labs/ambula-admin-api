@@ -12,3 +12,39 @@
             region: us-east
             image: linode/ubuntu22.04
             state: present
+        register: linode_instance
+
+      - name: Retrieve Linode instance IP address
+        set_fact:
+            linode_ip: "{{ linode_instance.instance.ip_addresses.ipv4[0] }}"
+
+      - name: Display Linode instance IP address
+        debug:
+            var: linode_ip
+
+      - name: Wait for SSH to become available
+        ansible.builtin.wait_for:
+            host: "{{ linode_ip }}"
+            port: 22
+            delay: 5
+            timeout: 300
+            state: started
+
+      - name: Install Git
+        ansible.builtin.apt:
+            name: git
+            state: present
+            update_cache: yes
+
+      - name: Clone the repository
+        ansible.builtin.git:
+            repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
+            dest: "/home/ubuntu/ambula-shell-output-api"
+            clone: yes
+            force: yes
+            version: main
+            accept_hostkey: yes
+            update: yes
+            depth: 1
+        become: yes
+        become_user: ubuntu
