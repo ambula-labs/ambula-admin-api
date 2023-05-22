@@ -14,17 +14,9 @@
             state: present
         register: linode_instance
 
-      - name: Retrieve Linode instance IP address
-        set_fact:
-            linode_ip: "{{ linode_instance.instance.ip_addresses.ipv4[0] }}"
-
-      - name: Display Linode instance IP address
-        debug:
-            var: linode_ip
-
       - name: Wait for SSH to become available
         ansible.builtin.wait_for:
-            host: "{{ linode_ip }}"
+            host: "{{ linode_instance.instance.ipv4 }}"
             port: 22
             delay: 5
             timeout: 300
