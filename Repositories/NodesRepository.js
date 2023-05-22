@@ -64,3 +64,12 @@ export async function deleteNode(id) {
 		throw new Error(`Failed to delete node ${id} : ${err}`);
 	}
 }
+
+export async function deleteNodeFromName(name) {
+	try {
+		const sql = `DELETE FROM nodes WHERE name = ${name}`;
+		await query(sql);
+	} catch (err) {
+		throw new Error(`Failed to delete node ${name} : ${err}`);
+	}
+}
