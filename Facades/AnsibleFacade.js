@@ -1,10 +1,4 @@
 export default async function createLinode(linodeLabel) {
-	// Label of the linode you want to deploy
-	const { linode_label } = request.body;
-	if (typeof linode_label !== "string" || !linode_label.trim()) {
-		return reply.code(400).send("Invalid linode_label");
-	}
-
 	// Spawn a new child process to run the Ansible playbook
 	const ansible = spawn("ansible-playbook", ["../deploylinode.yml", "--extra-vars", `linode_label=${linodeLabel}`]);
 
