@@ -22,7 +22,7 @@
 
       - name: Connect to remote machine
         ansible.builtin.shell:
-            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ linode_instance.instance.ipv4 }}"
+            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ linode_instance.instance.ipv4[0] }}"
         register: ssh_result
 
       - name: Display SSH output
