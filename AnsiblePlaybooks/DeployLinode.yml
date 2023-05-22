@@ -20,30 +20,33 @@
         debug:
             var: linode_instance.instance.ipv4
 
-      - name: Wait for SSH to become available
-        ansible.builtin.wait_for:
-            host: "{{ linode_instance.instance.ipv4 }}"
-            delay: 5
-            timeout: 300
-            state: started
-        vars:
-            ansible_ssh_pass: "{{ root_password }}"
+      - name: Connect to remote machine via SSH
+          hosts: localhost
+          tasks:
+            - name: Connect to remote machine
+              ansible.builtin.shell:
+                cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{linode_instance.instance.ipv4}}"
 
-      - name: Install Git
-        ansible.builtin.apt:
-            name: git
-            state: present
-            update_cache: yes
+      - name: Perform actions after SSH connection
+        hosts: localhost
+        gather_facts: false
+        tasks:
+          - name: Install Git
+            ansible.builtin.apt:
+              name: git
+              state: present
+              update_cache: yes
+            become: yes
 
-      - name: Clone the repository
-        ansible.builtin.git:
-            repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
-            dest: "/home/ubuntu/ambula-shell-output-api"
-            clone: yes
-            force: yes
-            version: main
-            accept_hostkey: yes
-            update: yes
-            depth: 1
-        become: yes
-        become_user: ubuntu
+          - name: Clone the repository
+            ansible.builtin.git:
+              repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
+              dest: "/home/ubuntu/ambula-shell-output-api"
+              clone: yes
+              force: yes
+              version: main
+              accept_hostkey: yes
+              update: yes
+              depth: 1
+            become: yes
+            become_user: ubuntu
