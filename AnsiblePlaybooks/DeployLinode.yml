@@ -20,37 +20,37 @@
         debug:
             var: linode_instance.instance.ipv4
 
-      - name: Connect to remote machine via SSH and perform actions
-        hosts: "{{ linode_instance.instance.ipv4[0] }}" # Set the host to the first IP address
-        gather_facts: false
-        vars:
-            root_password: "{{ root_password }}" # Pass root_password as an extra variable
-        tasks:
-            - name: Connect to remote machine
-              ansible.builtin.shell:
-                  cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ linode_instance.instance.ipv4[0] }}"
-              register: ssh_result
+- name: Connect to remote machine via SSH and perform actions
+  hosts: "{{ linode_instance.instance.ipv4[0] }}" # Set the host to the first IP address
+  gather_facts: false
+  vars:
+      root_password: "{{ root_password }}" # Pass root_password as an extra variable
+  tasks:
+      - name: Connect to remote machine
+        ansible.builtin.shell:
+            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ linode_instance.instance.ipv4[0] }}"
+        register: ssh_result
 
-            - name: Display SSH output
-              debug:
-                  var: ssh_result.stdout
+      - name: Display SSH output
+        debug:
+            var: ssh_result.stdout
 
-            - name: Install Git
-              ansible.builtin.apt:
-                  name: git
-                  state: present
-                  update_cache: yes
-              become: yes
+      - name: Install Git
+        ansible.builtin.apt:
+            name: git
+            state: present
+            update_cache: yes
+        become: yes
 
-            - name: Clone the repository
-              ansible.builtin.git:
-                  repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
-                  dest: "/home/ubuntu/ambula-shell-output-api"
-                  clone: yes
-                  force: yes
-                  version: main
-                  accept_hostkey: yes
-                  update: yes
-                  depth: 1
-              become: yes
-              become_user: root # Change to root or another user with sufficient privileges
+      - name: Clone the repository
+        ansible.builtin.git:
+            repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
+            dest: "/home/ubuntu/ambula-shell-output-api"
+            clone: yes
+            force: yes
+            version: main
+            accept_hostkey: yes
+            update: yes
+            depth: 1
+        become: yes
+        become_user: root # Change to root or another user with sufficient privileges
