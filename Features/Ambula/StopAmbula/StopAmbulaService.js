@@ -16,7 +16,7 @@ async function handle() {
 	const updateRequest = new updateChainInfosRequest(0);
 	await updateChainInfosService(updateRequest);
 
-	const insertRequest = new insertActivityRequest("Stopping Chain");
+	const insertRequest = new insertActivityRequest("Stopping Ambula Chain ⏳");
 	await insertActivityService(insertRequest);
 }
 
