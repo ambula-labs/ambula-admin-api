@@ -3,18 +3,18 @@
   vars:
       instance_label: "{{ 'ambula-' + linode_label }}"
       ansible_python_interpreter: /root/miniconda3/bin/python3
-      root_password: "ambula_pwd"  # Set your desired root password
+      root_password: "ambula_pwd" # Set your desired root password
   tasks:
-    - name: Create a Linode instance
-      linode.cloud.instance:
-        api_token: "{{ lookup('env', 'API_TOKEN') }}"
-        label: "{{ instance_label }}"
-        type: g6-nanode-1
-        region: us-east
-        image: linode/ubuntu22.04
-        state: present
-        root_pass: "{{ root_password }}"
-      register: linode_instance
+      - name: Create a Linode instance
+        linode.cloud.instance:
+            api_token: "{{ lookup('env', 'API_TOKEN') }}"
+            label: "{{ instance_label }}"
+            type: g6-nanode-1
+            region: us-east
+            image: linode/ubuntu22.04
+            state: present
+            root_pass: "{{ root_password }}"
+        register: linode_instance
 
       - name: Print Linode instance IP address
         debug:
@@ -22,14 +22,13 @@
 
       - name: Wait for SSH to become available
         ansible.builtin.wait_for:
-          host: "{{ linode_instance.instance.ipv4 }}"
-          port: 22
-          delay: 5
-          timeout: 300
-          state: started
+            host: "{{ linode_instance.instance.ipv4 }}"
+            port: 22
+            delay: 5
+            timeout: 300
+            state: started
         vars:
-          ansible_ssh_pass: "{{ root_password }}"
-
+            ansible_ssh_pass: "{{ root_password }}"
 
       - name: Install Git
         ansible.builtin.apt:
