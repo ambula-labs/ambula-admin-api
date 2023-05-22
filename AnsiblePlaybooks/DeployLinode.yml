@@ -2,6 +2,7 @@
   hosts: localhost
   vars:
       instance_label: "{{ 'ambula-' + linode_label }}"
+      ansible_python_interpreter: /root/miniconda3/bin/python3
   tasks:
       - name: Create a Linode instance
         linode.cloud.instance:
