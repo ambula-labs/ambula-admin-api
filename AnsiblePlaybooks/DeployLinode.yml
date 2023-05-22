@@ -1,0 +1,13 @@
+- name: Create Linode Instance
+  hosts: localhost
+  vars:
+      instance_label: "{{ 'ambula-' + linode_label }}"
+  tasks:
+      - name: Create a Linode instance
+        linode.cloud.instance:
+            api_token: lookup('env', 'API_TOKEN')
+            label: "{{ instance_label }}"
+            type: g6-nanode-1
+            region: us-east
+            image: linode/ubuntu22.04
+            state: present
