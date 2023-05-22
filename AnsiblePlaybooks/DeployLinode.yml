@@ -23,7 +23,6 @@
       - name: Wait for SSH to become available
         ansible.builtin.wait_for:
             host: "{{ linode_instance.instance.ipv4 }}"
-            port: 22
             delay: 5
             timeout: 300
             state: started

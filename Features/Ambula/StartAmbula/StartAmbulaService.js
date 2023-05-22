@@ -7,15 +7,15 @@ import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityR
 import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
 
 async function handle() {
-	await createLinode("alice");
-	await createLinode("bob");
-	await createLinode("charlie");
+	const ipAlice = await createLinode("alice");
+	const ipBob = await createLinode("bob");
+	const ipCharlie = await createLinode("charlie");
 
-	const insertRequest = new insertNodeRequest("alice", "ip", "online", 0);
+	const insertRequest = new insertNodeRequest("alice", ipAlice, "online", 0);
 	await insertNodeService(insertRequest);
-	insertRequest.name = "bob";
+	insertRequest = new insertNodeRequest("bob", ipBob, "online", 0);
 	await insertNodeService(insertRequest);
-	insertRequest.name = "charlie";
+	insertRequest.name = new insertNodeRequest("charlie", ipCharlie, "online", 0);
 	await insertNodeService(insertRequest);
 
 	const updateRequest = new updateChainInfosRequest(1);
