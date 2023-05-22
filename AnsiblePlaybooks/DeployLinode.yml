@@ -20,7 +20,7 @@
         debug:
             var: linode_instance.instance.ipv4
 
-      - name: Set linode_instance fact
+      - name: Set linode_instance as a global variable
         set_fact:
             linode_instance: "{{ linode_instance }}"
 
