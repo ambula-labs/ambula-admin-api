@@ -67,7 +67,7 @@ export async function deleteNode(id) {
 
 export async function deleteNodeFromName(name) {
 	try {
-		const sql = `DELETE FROM nodes WHERE name = ${name}`;
+		const sql = `DELETE FROM nodes WHERE name = '${name}'`;
 		await query(sql);
 	} catch (err) {
 		throw new Error(`Failed to delete node ${name} : ${err}`);
