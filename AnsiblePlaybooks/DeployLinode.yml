@@ -20,10 +20,6 @@
         debug:
             var: linode_instance.instance.ipv4
 
-      - name: Set linode_instance as a global variable
-        set_fact:
-            linode_instance: "{{ linode_instance }}"
-
 - name: Connect to remote machine via SSH and perform actions
   hosts: "{{ linode_instance.instance.ipv4[0] }}" # Set the host to the first IP address
   gather_facts: false
