@@ -1,6 +1,6 @@
 import { deleteLinode } from "../../../Facades/AnsibleFacade.js";
 import updateChainInfosRequest from "../../ChainInfos/UpdateChainInfos/UpdateChainInfosRequest.js";
-import updateChainInfosService from "../../ChainInfos/UpdateChainInfos/updateChainInfosService.js";
+import updateChainInfosService from "../../ChainInfos/UpdateChainInfos/UpdateChainInfosService.js";
 import { deleteNodeFromName } from "../../../Repositories/NodesRepository.js";
 
 async function handle() {
