@@ -1,6 +1,8 @@
 import { deleteLinode } from "../../../Facades/AnsibleFacade.js";
 import updateChainInfosRequest from "../../ChainInfos/UpdateChainInfos/UpdateChainInfosRequest.js";
 import updateChainInfosService from "../../ChainInfos/UpdateChainInfos/UpdateChainInfosService.js";
+import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityRequest.js";
+import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
 import { deleteNodeFromName } from "../../../Repositories/NodesRepository.js";
 
 async function handle() {
@@ -13,6 +15,9 @@ async function handle() {
 
 	const updateRequest = new updateChainInfosRequest(0);
 	await updateChainInfosService(updateRequest);
+
+	const insertRequest = new insertActivityRequest("Stopping Chain");
+	await insertActivityService(insertRequest);
 }
 
 export default handle;

@@ -3,6 +3,8 @@ import updateChainInfosRequest from "../../ChainInfos/UpdateChainInfos/UpdateCha
 import updateChainInfosService from "../../ChainInfos/UpdateChainInfos/UpdateChainInfosService.js";
 import insertNodeRequest from "../../Nodes/InsertNode/InsertNodeRequest.js";
 import insertNodeService from "../../Nodes/InsertNode/InsertNodeService.js";
+import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityRequest.js";
+import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
 
 async function handle() {
 	await createLinode("alice");
@@ -18,6 +20,9 @@ async function handle() {
 
 	const updateRequest = new updateChainInfosRequest(1);
 	await updateChainInfosService(updateRequest);
+
+	const insertActRequest = new insertActivityRequest("Stopping Chain");
+	await insertActivityService(insertActRequest);
 }
 
 export default handle;
