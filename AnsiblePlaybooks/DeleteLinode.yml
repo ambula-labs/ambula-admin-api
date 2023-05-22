@@ -5,6 +5,6 @@
   tasks:
       - name: Delete a Linode instance
         linode.cloud.instance:
-            api_token: lookup('env', 'API_TOKEN')
+            api_token: "{{ lookup('env', 'API_TOKEN') }}"
             label: "{{ instance_label }}"
             state: absent

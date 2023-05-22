@@ -5,7 +5,7 @@
   tasks:
       - name: Create a Linode instance
         linode.cloud.instance:
-            api_token: lookup('env', 'API_TOKEN')
+            api_token: "{{ lookup('env', 'API_TOKEN') }}"
             label: "{{ instance_label }}"
             type: g6-nanode-1
             region: us-east
