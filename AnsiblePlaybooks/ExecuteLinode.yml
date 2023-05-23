@@ -1,6 +1,8 @@
 - name: Connect to remote machine via SSH and perform actions
   hosts: all
   gather_facts: false
+  vars:
+      ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
       - name: Retry SSH connection
         block:
