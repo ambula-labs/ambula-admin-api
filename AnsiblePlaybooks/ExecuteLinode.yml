@@ -3,6 +3,7 @@
   gather_facts: false
   vars:
       root_password: "@Ambula123!"
+      ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
       - name: Update apt cache
         ansible.builtin.apt:
