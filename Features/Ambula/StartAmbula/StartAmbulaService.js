@@ -1,4 +1,5 @@
 import createLinode from "../../../Facades/AnsibleFacade.js";
+import { executeLinode } from "../../../Facades/AnsibleFacade.js";
 import updateChainInfosRequest from "../../ChainInfos/UpdateChainInfos/UpdateChainInfosRequest.js";
 import updateChainInfosService from "../../ChainInfos/UpdateChainInfos/UpdateChainInfosService.js";
 import insertNodeRequest from "../../Nodes/InsertNode/InsertNodeRequest.js";
@@ -8,8 +9,11 @@ import insertActivityService from "../../Activity/InsertActivity/InsertActivityS
 
 async function handle() {
 	const ipAlice = await createLinode("alice");
+	await executeLinode(ipAlice);
 	const ipBob = await createLinode("bob");
+	await executeLinode(ipBob);
 	const ipCharlie = await createLinode("charlie");
+	await executeLinode(ipCharlie);
 
 	const insertRequest = new insertNodeRequest("alice", ipAlice, "online", 0);
 	await insertNodeService(insertRequest);

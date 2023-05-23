@@ -1,0 +1,33 @@
+- name: Connect to remote machine via SSH and perform actions
+  hosts: "{{ my_playbook_hosts }}"
+  vars:
+      root_password: "@Ambula123!"
+  tasks:
+      - name: Connect to remote machine
+        ansible.builtin.shell:
+            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ my_playbook_hosts }}"
+        register: ssh_result
+
+      - name: Display SSH output
+        debug:
+            var: ssh_result.stdout
+
+      - name: Install Git
+        ansible.builtin.apt:
+            name: git
+            state: present
+            update_cache: yes
+        become: yes
+
+      - name: Clone the repository
+        ansible.builtin.git:
+            repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
+            dest: "/home/ubuntu/ambula-shell-output-api"
+            clone: yes
+            force: yes
+            version: main
+            accept_hostkey: yes
+            update: yes
+            depth: 1
+        become: yes
+        become_user: root # Change to root or another user with sufficient privileges
