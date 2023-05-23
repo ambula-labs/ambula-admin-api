@@ -1,11 +1,6 @@
 - name: Connect to remote machine via SSH and perform actions
   hosts: all
   tasks:
-      - name: Add remote host fingerprint to known_hosts
-        ansible.builtin.known_hosts:
-            name: "{{ inventory_hostname }}"
-            state: present
-
       - name: Install Git
         ansible.builtin.apt:
             name: git
