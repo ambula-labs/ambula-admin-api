@@ -38,7 +38,7 @@
 
       - name: Install specific version of npm
         ansible.builtin.command:
-            cmd: npm install -g npm@9.5.1
+            cmd: npm install -g npm
         become: yes
         become_user: root
 
