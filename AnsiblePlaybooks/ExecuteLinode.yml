@@ -26,26 +26,26 @@
 
       - name: Change to the repository directory
         ansible.builtin.shell:
-          cmd: cd /ambula-shell-output-api
-          chdir: /ambula-shell-output-api
+            cmd: cd /ambula-shell-output-api
+            chdir: /ambula-shell-output-api
         become: yes
         become_user: root
 
       - name: Install npm
-      ansible.builtin.apt:
-        name: npm
-        state: present
-        update_cache: yes
-      become: yes
+        ansible.builtin.apt:
+            name: npm
+            state: present
+            update_cache: yes
+        become: yes
 
-    - name: Install npm dependencies
-      ansible.builtin.command:
-        cmd: npm install
-      become: yes
-      become_user: root
+      - name: Install npm dependencies
+        ansible.builtin.command:
+            cmd: npm install
+        become: yes
+        become_user: root
 
-    - name: Start the application
-      ansible.builtin.command:
-        cmd: npm start
-      become: yes
-      become_user: root
+      - name: Start the application
+        ansible.builtin.command:
+            cmd: npm start
+        become: yes
+        become_user: root
