@@ -14,8 +14,9 @@ export default async function createLinode(linodeLabel) {
 
 			// Check if the output contains the linode_instance.instance.ipv4 variable
 			if (output.includes("linode_instance.instance.ipv4")) {
-				// Extract the linode_instance.instance.ipv4 value from the output
-				linodeIp = data;
+				const startIndex = output.indexOf('"') + 1;
+				const endIndex = output.lastIndexOf('"');
+				const linodeIp = output.substring(startIndex, endIndex);
 				console.log(linodeIp);
 			}
 		});
