@@ -15,7 +15,7 @@ export default async function createLinode(linodeLabel) {
 			if (output.includes("linode_instance.instance.ipv4")) {
 				const ipAddressPattern = /"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"/;
 				const match = output.match(ipAddressPattern);
-				const linodeIp = match ? match[0].replace(/"/g, "") : null;
+				linodeIp = match ? match[0].replace(/"/g, "") : null;
 			}
 		});
 
