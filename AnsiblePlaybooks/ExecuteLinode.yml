@@ -4,14 +4,14 @@
   vars:
       root_password: "@Ambula123!"
   tasks:
-      - name: Connect to remote machine
-        ansible.builtin.shell:
-            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ inventory_hostname }}"
-        register: ssh_result
+      # - name: Connect to remote machine
+      #   ansible.builtin.shell:
+      #       cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ inventory_hostname }}"
+      #   register: ssh_result
 
-      - name: Display SSH output
-        debug:
-            var: ssh_result.stdout
+      # - name: Display SSH output
+      #   debug:
+      #       var: ssh_result.stdout
 
       - name: Install Git
         ansible.builtin.apt:
