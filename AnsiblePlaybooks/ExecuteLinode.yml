@@ -11,12 +11,25 @@
             update_cache: yes
         become: yes
 
-      - name: Install Node.js 18.x
-        import_role:
-            name: nodesource.node
-        vars:
-            node_version: 18.x
-            node_install_complementary: true
+      - name: Download Node.js binary package
+        ansible.builtin.get_url:
+            url: "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz"
+            dest: "/tmp/node-v18.16.0-linux-x64.tar.xz"
+        become: yes
+
+      - name: Extract Node.js package
+        ansible.builtin.unarchive:
+            src: "/tmp/node-v18.16.0-linux-x64.tar.xz"
+            dest: "/usr/local"
+            remote_src: yes
+            extra_opts: "--strip-components=1"
+        become: yes
+
+      - name: Set Node.js environment variables
+        ansible.builtin.lineinfile:
+            path: /etc/profile.d/nodejs.sh
+            line: "export PATH=$PATH:/usr/local/bin"
+            create: yes
         become: yes
 
       - name: Install specific version of npm
