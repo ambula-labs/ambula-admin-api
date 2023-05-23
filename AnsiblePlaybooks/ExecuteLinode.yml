@@ -1,11 +1,12 @@
 - name: Connect to remote machine via SSH and perform actions
-  hosts: "{{ my_playbook_hosts }}"
+  hosts: all
+  gather_facts: false
   vars:
       root_password: "@Ambula123!"
   tasks:
       - name: Connect to remote machine
         ansible.builtin.shell:
-            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ my_playbook_hosts }}"
+            cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ inventory_hostname }}"
         register: ssh_result
 
       - name: Display SSH output
