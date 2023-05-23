@@ -1,7 +1,5 @@
 - name: Connect to remote machine via SSH and perform actions
   hosts: all
-  vars:
-      root_password: "@Ambula123!"
   tasks:
       - name: Add remote host fingerprint to known_hosts
         ansible.builtin.shell: ssh-keyscan "{{ inventory_hostname }}" >> ~/.ssh/known_hosts
