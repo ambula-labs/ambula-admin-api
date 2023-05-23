@@ -11,19 +11,19 @@
             update_cache: yes
         become: yes
 
-      - name: Install Node.js
-        ansible.builtin.apt:
-            name: nodejs
-            state: present
-            update_cache: yes
+      - name: Install Node.js 18.x
+        import_role:
+            name: nodesource.node
+        vars:
+            node_version: 18.x
+            node_install_complementary: true
         become: yes
 
-      - name: Install npm
-        ansible.builtin.apt:
-            name: npm
-            state: present
-            update_cache: yes
+      - name: Install specific version of npm
+        ansible.builtin.command:
+            cmd: npm install -g npm@9.5.1
         become: yes
+        become_user: root
 
       - name: Clone the repository
         ansible.builtin.git:
