@@ -24,13 +24,6 @@
         become: yes
         become_user: root # Change to root or another user with sufficient privileges
 
-      - name: Change to the repository directory
-        ansible.builtin.shell:
-            cmd: cd /ambula-shell-output-api
-            chdir: /ambula-shell-output-api
-        become: yes
-        become_user: root
-
       - name: Install npm
         ansible.builtin.apt:
             name: npm
@@ -41,11 +34,13 @@
       - name: Install npm dependencies
         ansible.builtin.command:
             cmd: npm install
+            chdir: /ambula-shell-output-api
         become: yes
         become_user: root
 
       - name: Start the application
         ansible.builtin.command:
             cmd: npm start
+            chdir: /ambula-shell-output-api
         become: yes
         become_user: root
