@@ -65,5 +65,5 @@
       - name: Start the application
         ansible.builtin.async_command:
             cmd: npm start
-            become: yes
-            become_user: root
+        become: yes
+        become_user: root
