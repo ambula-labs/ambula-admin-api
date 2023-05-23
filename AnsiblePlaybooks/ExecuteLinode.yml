@@ -2,11 +2,19 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: Update package cache
-        apt:
-            update_cache: yes
-        become: true
-        become_method: sudo
+      - name: Retry SSH connection
+        block:
+            - name: Update package cache
+              apt:
+                  update_cache: yes
+              become: true
+              become_method: sudo
+        rescue:
+            - name: Retry SSH connection
+              meta: clear_host_errors
+              when: "'SSH Error: Timeout connecting to' in ansible_failed_result.msg"
+              retries: 3
+              delay: 10
 
       - name: Install Git
         apt:
