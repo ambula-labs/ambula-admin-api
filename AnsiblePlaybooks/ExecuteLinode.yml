@@ -59,19 +59,19 @@
         become_user: root
 
       - name: Start the application
-      ansible.builtin.command:
-        cmd: npm start
-        async: 300
-        poll: 0
-      become: yes
-      become_user: root
+        ansible.builtin.command:
+            cmd: npm start
+            async: 300
+            poll: 0
+        become: yes
+        become_user: root
 
       - name: Wait for the application to start
         ansible.builtin.wait_for:
-          host: "{{ inventory_hostname }}"
-          port: 3000
-          state: started
-          timeout: 300
-          delay: 5
+            host: "{{ inventory_hostname }}"
+            port: 3000
+            state: started
+            timeout: 300
+            delay: 5
         become: yes
         become_user: root
