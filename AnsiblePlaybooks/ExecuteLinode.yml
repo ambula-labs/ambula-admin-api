@@ -4,15 +4,6 @@
   vars:
       root_password: "@Ambula123!"
   tasks:
-      # - name: Connect to remote machine
-      #   ansible.builtin.shell:
-      #       cmd: sshpass -p "{{ root_password }}" ssh -o StrictHostKeyChecking=no -l root "{{ inventory_hostname }}"
-      #   register: ssh_result
-
-      # - name: Display SSH output
-      #   debug:
-      #       var: ssh_result.stdout
-
       - name: Install Git
         ansible.builtin.apt:
             name: git
@@ -23,7 +14,7 @@
       - name: Clone the repository
         ansible.builtin.git:
             repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
-            dest: "/home/ubuntu/ambula-shell-output-api"
+            dest: "/ambula-shell-output-api"
             clone: yes
             force: yes
             version: main
@@ -32,3 +23,21 @@
             depth: 1
         become: yes
         become_user: root # Change to root or another user with sufficient privileges
+
+      - name: Change to the repository directory
+        ansible.builtin.command:
+            cmd: cd /ambula-shell-output-api
+        become: yes
+        become_user: root
+
+      - name: Install npm dependencies
+        ansible.builtin.command:
+            cmd: npm install
+        become: yes
+        become_user: root
+
+      - name: Start the application
+        ansible.builtin.command:
+            cmd: npm start
+        become: yes
+        become_user: root
