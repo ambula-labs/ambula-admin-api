@@ -9,16 +9,12 @@ import insertActivityService from "../../Activity/InsertActivity/InsertActivityS
 
 async function handle() {
 	const ipAlice = await createLinode("alice");
-	await delay(5000);
-
-	await executeLinode(ipAlice);
-
 	const ipBob = await createLinode("bob");
-	await delay(5000);
-	await executeLinode(ipBob);
-
 	const ipCharlie = await createLinode("charlie");
-	await delay(5000);
+
+	await delay(30000);
+	await executeLinode(ipAlice);
+	await executeLinode(ipBob);
 	await executeLinode(ipCharlie);
 
 	const insertRequest = new insertNodeRequest("alice", ipAlice, "online", 0);
