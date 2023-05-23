@@ -65,7 +65,7 @@
       - name: Start the application
         ansible.builtin.shell:
             cmd: npm start
-            async: 300
-            poll: 0
+        async: 300
+        poll: 0
         become: yes
         become_user: root
