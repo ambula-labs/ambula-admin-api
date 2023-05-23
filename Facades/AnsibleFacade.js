@@ -10,7 +10,7 @@ export default async function createLinode(linodeLabel) {
 		// Log the output of the child process to the console
 		ansible.stdout.on("data", (data) => {
 			const output = data.toString();
-			console.log(`stdout: ${output}`);
+			//console.log(`stdout: ${output}`);
 
 			// Check if the output contains the linode_instance.instance.ipv4 variable
 			if (output.includes("linode_instance.instance.ipv4")) {
