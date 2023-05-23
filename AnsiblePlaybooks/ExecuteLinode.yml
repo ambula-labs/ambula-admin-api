@@ -3,7 +3,6 @@
   gather_facts: false
   vars:
       root_password: "@Ambula123!"
-      ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
   tasks:
       - name: Install Git
         ansible.builtin.apt:
