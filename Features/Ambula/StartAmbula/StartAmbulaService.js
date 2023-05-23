@@ -12,7 +12,6 @@ async function handle() {
 	const ipBob = await createLinode("bob");
 	const ipCharlie = await createLinode("charlie");
 
-	await delay(30000);
 	await executeLinode(ipAlice);
 	await executeLinode(ipBob);
 	await executeLinode(ipCharlie);
@@ -21,7 +20,7 @@ async function handle() {
 	await insertNodeService(insertRequest);
 	insertRequest = new insertNodeRequest("bob", ipBob, "online", 0);
 	await insertNodeService(insertRequest);
-	insertRequest.name = new insertNodeRequest("charlie", ipCharlie, "online", 0);
+	insertRequest = new insertNodeRequest("charlie", ipCharlie, "online", 0);
 	await insertNodeService(insertRequest);
 
 	const updateRequest = new updateChainInfosRequest(1);
