@@ -11,7 +11,7 @@
             label: "{{ instance_label }}"
             type: g6-nanode-1
             region: us-east
-            image: linode/ubuntu18.04
+            image: linode/ubuntu23.04
             state: present
             root_pass: "{{ root_password }}"
         register: linode_instance
