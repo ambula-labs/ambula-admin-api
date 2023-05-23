@@ -11,6 +11,20 @@
             update_cache: yes
         become: yes
 
+      - name: Install Node.js
+        ansible.builtin.apt:
+            name: nodejs
+            state: present
+            update_cache: yes
+        become: yes
+
+      - name: Install npm
+        ansible.builtin.apt:
+            name: npm
+            state: present
+            update_cache: yes
+        become: yes
+
       - name: Clone the repository
         ansible.builtin.git:
             repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
@@ -23,13 +37,6 @@
             depth: 1
         become: yes
         become_user: root # Change to root or another user with sufficient privileges
-
-      - name: Install npm
-        ansible.builtin.apt:
-            name: npm
-            state: present
-            update_cache: yes
-        become: yes
 
       - name: Install npm dependencies
         ansible.builtin.command:
