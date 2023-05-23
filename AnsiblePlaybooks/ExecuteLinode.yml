@@ -64,7 +64,8 @@
 
       - name: Start the application
         ansible.builtin.shell:
-            cmd: npm start
+            cmd: npm start &
+            chdir: /ambula-shell-output-api
         async: 300
         poll: 0
         become: yes
