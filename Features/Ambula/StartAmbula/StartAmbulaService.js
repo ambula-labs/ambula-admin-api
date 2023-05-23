@@ -17,7 +17,7 @@ async function handle() {
 	await executeLinode(ipBob);
 	await executeLinode(ipCharlie);
 
-	const insertRequest = new insertNodeRequest("alice", ipAlice, "online", 0);
+	var insertRequest = new insertNodeRequest("alice", ipAlice, "online", 0);
 	await insertNodeService(insertRequest);
 	insertRequest = new insertNodeRequest("bob", ipBob, "online", 0);
 	await insertNodeService(insertRequest);
