@@ -1,12 +1,19 @@
 - name: Connect to remote machine via SSH and perform actions
   hosts: all
+  gather_facts: false
   tasks:
+      - name: Update package cache
+        apt:
+            update_cache: yes
+        become: true
+        become_method: sudo
+
       - name: Install Git
-        ansible.builtin.apt:
+        apt:
             name: git
             state: present
-            update_cache: yes
-        become: yes
+        become: true
+        become_method: sudo
 
       - name: Download Node.js binary package
         ansible.builtin.get_url:
