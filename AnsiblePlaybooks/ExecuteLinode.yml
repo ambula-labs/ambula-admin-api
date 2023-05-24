@@ -64,6 +64,23 @@
         become: yes
         become_user: root
 
+      - name: Install Docker
+        apt:
+            name: docker.io
+            state: present
+        become: true
+        become_method: sudo
+
+      - name: Pull Parity/Substrate Docker image
+        shell: docker pull parity/substrate
+        become: true
+        become_method: sudo
+
+      - name: Pull Ambula Docker image
+        shell: docker pull ambula/node:latest
+        become: true
+        become_method: sudo
+
       - name: Start the application
         ansible.builtin.shell:
             cmd: npm start &
