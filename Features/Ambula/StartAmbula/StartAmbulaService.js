@@ -8,9 +8,9 @@ import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityR
 import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
 
 async function handle() {
-	const ipAlice = await createLinode("Alice");
-	const ipBob = await createLinode("Bob");
-	const ipCharlie = await createLinode("Charlie");
+	const ipAlice = await createLinode("Alice", "us-east");
+	const ipBob = await createLinode("Bob", "ap-west");
+	const ipCharlie = await createLinode("Charlie", "eu-west");
 
 	await executeLinode("Alice", ipAlice, ipAlice);
 	await executeLinode("Bob", ipBob, ipAlice);
