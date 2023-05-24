@@ -1,3 +1,13 @@
+- name: SSH KEYGEN
+  host: localhost
+  gather_facts: false
+  tasks:
+      - name: SSH cache
+        ansible.builtin.shell:
+            cmd: ssh-keygen -R "{{ linode_ip }}"
+        become: yes
+        become_user: root
+
 - name: Connect to remote machine via SSH and perform actions
   hosts: all
   gather_facts: false

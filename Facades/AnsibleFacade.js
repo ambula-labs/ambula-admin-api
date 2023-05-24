@@ -35,7 +35,7 @@ export default async function createLinode(linodeLabel) {
 export async function executeLinode(name, host) {
 	return new Promise((resolve, reject) => {
 		// Spawn a new child process to run the Ansible playbook
-		const ansible = spawn("ansible-playbook", ["-i", `${host},`, "./AnsiblePlaybooks/ExecuteLinode.yml", "--extra-vars", `name=${name} ansible_password=@Ambula123!`]);
+		const ansible = spawn("ansible-playbook", ["-i", `${host},`, "./AnsiblePlaybooks/ExecuteLinode.yml", "--extra-vars", `linode_ip=${host} name=${name} ansible_password=@Ambula123!`]);
 
 		// Log the output of the child process to the console
 		ansible.stdout.on("data", (data) => {
