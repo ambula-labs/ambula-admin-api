@@ -1,0 +1,21 @@
+- name: Create Linode Instance
+  hosts: localhost
+  vars:
+      instance_label: "{{ 'ambula-' + linode_label }}"
+      ansible_python_interpreter: /root/miniconda3/bin/python3
+      root_password: "@Ambula123!" # Set your desired root password
+  tasks:
+      - name: Create a Linode instance
+        linode.cloud.instance:
+            api_token: "{{ lookup('env', 'API_TOKEN') }}"
+            label: "{{ instance_label }}"
+            type: g6-nanode-1
+            region: us-east
+            image: linode/ubuntu23.04
+            state: present
+            root_pass: "{{ root_password }}"
+        register: linode_instance
+
+      - name: Print Linode instance IP address
+        debug:
+            var: linode_instance.instance.ipv4

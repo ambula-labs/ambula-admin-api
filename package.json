@@ -1,16 +1,18 @@
 {
-	"name": "tablette-maman-api",
+	"name": "ambula-admin-api",
 	"version": "1.0.0",
 	"description": "A basic Fastify backend server",
-	"main": "server.js",
+	"main": "app.js",
+	"type": "module",
 	"scripts": {
-		"start": "node server.js",
-		"dev": "nodemon server.js"
+		"start": "node app.js",
+		"dev": "nodemon app.js"
 	},
 	"dependencies": {
 		"@fastify/formbody": "^7.4.0",
 		"child_process": "^1.0.2",
-		"fastify": "^4.17.0"
+		"fastify": "^4.17.0",
+		"mysql": "^2.18.1"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.13"
