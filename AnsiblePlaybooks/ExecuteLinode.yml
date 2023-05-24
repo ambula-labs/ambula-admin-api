@@ -47,6 +47,12 @@
         become_user: root
         when: name != "Alice"
 
+      - name: Start docker Ambula
+        ansible.builtin.shell:
+            cmd: docker start ambula
+        become: yes
+        become_user: root
+
       - name: Send logs to the WebSocket
         ansible.builtin.shell:
             cmd: websocketd --port=8080 docker logs -f ambula
