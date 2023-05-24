@@ -12,9 +12,9 @@ async function handle() {
 	const ipBob = await createLinode("Bob");
 	const ipCharlie = await createLinode("Charlie");
 
-	await executeLinode("Alice", ipAlice);
-	await executeLinode("Bob", ipBob);
-	await executeLinode("Charlie", ipCharlie);
+	await executeLinode("Alice", ipAlice, ipAlice);
+	await executeLinode("Bob", ipBob, ipAlice);
+	await executeLinode("Charlie", ipCharlie, ipAlice);
 
 	var insertRequest = new insertNodeRequest("Alice", ipAlice, "online", 0);
 	await insertNodeService(insertRequest);

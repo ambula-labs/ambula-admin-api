@@ -39,6 +39,16 @@ export async function getNode(id) {
 	}
 }
 
+export async function getNodeFromName(name) {
+	try {
+		const sql = `SELECT * FROM nodes WHERE name = '${name}'`;
+		const rows = await query(sql);
+		return fromDatabaseResult(rows[0]);
+	} catch (err) {
+		throw new Error(`Failed to fetch node ${name} : ${err}`);
+	}
+}
+
 export async function getLastIdInNodes() {
 	try {
 		const sql = "SELECT id FROM nodes ORDER BY id DESC LIMIT 1";

@@ -4,7 +4,7 @@ import insertNodeRequest from "../../Nodes/InsertNode/InsertNodeRequest.js";
 import insertNodeService from "../../Nodes/InsertNode/InsertNodeService.js";
 import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityRequest.js";
 import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
-import { getNodesNames, getLastIdInNodes } from "../../../Repositories/NodesRepository.js";
+import { getNodesNames, getLastIdInNodes, getNodeFromName } from "../../../Repositories/NodesRepository.js";
 
 function delay(ms) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
@@ -37,7 +37,8 @@ async function handle() {
 
 	const ipResult = await createLinode(result);
 	await delay(60000);
-	await executeLinode(result, ipResult);
+	const ipAlice = await getNodeFromName("Alice");
+	await executeLinode(result, ipResult, ipAlice);
 
 	var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
 	await insertNodeService(insertRequest);
