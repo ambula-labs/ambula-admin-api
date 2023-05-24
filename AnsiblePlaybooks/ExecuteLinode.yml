@@ -41,7 +41,7 @@
 
       - name: Start the master node
         ansible.builtin.shell:
-            cmd: docker run -d -p 9933:9933 -p 9945:9945 --name ambula ambula/node --dev --base-path /tmp/a --port=30335 --ws-port 9945 --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external
+            cmd: docker run -d -p 9933:9933 -p 9945:9945 -p 30335:30335 --name ambula ambula/node --chain local --alice --base-path /tmp/a --port=30335 --ws-port 9945 --rpc-port 9933 --node-key 0000000000000000000000000000000000000000000000000000000000000001 --validator --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external
         async: 300
         poll: 0
         become: yes
@@ -50,7 +50,7 @@
 
       - name: Start the following node
         ansible.builtin.shell:
-            cmd: docker run -d -p 9933:9933 -p 9945:9945 --name ambula ambula/node --dev --base-path /tmp/a --port=30335 --ws-port 9945 --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external --bootnodes /ip4/{{ alice_ip }}/tcp/30334/p2p/12D3KooWH2J2Z2UKNriZ6oNRuL9DQRkNWsZAGRW8QzTvyL2jy5f9
+            cmd: docker run -d -p 9933:9933 -p 9945:9945 -p 30335:30335 --name ambula ambula/node --dev --{{ nom_noeud }} --base-path /tmp/a --port=30335 --ws-port 9945 --validator --rpc-port 9933 --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external --bootnodes /ip4/{{ alice_ip }}/tcp/30335/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
         async: 300
         poll: 0
         become: yes
