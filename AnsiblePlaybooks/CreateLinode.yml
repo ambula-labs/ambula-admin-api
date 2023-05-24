@@ -10,7 +10,7 @@
             api_token: "{{ lookup('env', 'API_TOKEN') }}"
             label: "{{ instance_label }}"
             type: g6-nanode-1
-            region: us-east
+            region: "{{ linode_region }}"
             image: linode/ubuntu23.04
             state: present
             root_pass: "{{ root_password }}"

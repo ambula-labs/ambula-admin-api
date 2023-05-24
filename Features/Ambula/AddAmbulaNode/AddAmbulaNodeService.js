@@ -35,7 +35,7 @@ async function handle() {
 		result = "Unamed" + (parseInt(id) + 1);
 	}
 
-	const ipResult = await createLinode(result);
+	const ipResult = await createLinode(result, "us-east");
 	await delay(60000);
 	const ipAlice = await getNodeFromName("Alice");
 	await executeLinode(result, ipResult, ipAlice.ip);

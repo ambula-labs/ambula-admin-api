@@ -1,9 +1,9 @@
 import { spawn } from "child_process";
 
-export default async function createLinode(linodeLabel) {
+export default async function createLinode(linodeLabel, linodeRegion) {
 	return new Promise((resolve, reject) => {
 		// Spawn a new child process to run the Ansible playbook
-		const ansible = spawn("ansible-playbook", ["./AnsiblePlaybooks/CreateLinode.yml", "--extra-vars", `linode_label=${linodeLabel}`]);
+		const ansible = spawn("ansible-playbook", ["./AnsiblePlaybooks/CreateLinode.yml", "--extra-vars", `linode_label=${linodeLabel} linode_region=${linodeRegion}`]);
 
 		let linodeIp = ""; // Variable to store the linode_ip value
 
