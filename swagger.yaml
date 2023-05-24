@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+    title: Ambula Admin API
+    version: 1.0.0
+paths:
+    /nodes/:
+        get:
+            summary: Récupère la liste des nœuds
+            responses:
+                "200":
+                    description: Succès
+        post:
+            summary: Insère un nouveau nœud
+            responses:
+                "200":
+                    description: Succès
+    /nodes/{node_id}:
+        get:
+            summary: Récupère des informations sur un nœud spécifique
+            parameters:
+                - name: node_id
+                  in: path
+                  required: true
+                  description: ID du nœud
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succès
+        put:
+            summary: Met à jour les informations d'un nœud spécifique
+            parameters:
+                - name: node_id
+                  in: path
+                  required: true
+                  description: ID du nœud
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succès
+        delete:
+            summary: Supprime un nœud spécifique
+            parameters:
+                - name: node_id
+                  in: path
+                  required: true
+                  description: ID du nœud
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succès
+    /chain-infos/:
+        get:
+            summary: Récupère des informations sur la blockchain
+            responses:
+                "200":
+                    description: Succès
+        put:
+            summary: Met à jour des informations sur la blockchain
+            responses:
+                "200":
+                    description: Succès
+    /ambula/start:
+        post:
+            summary: Lance la blockchain Ambula
+            responses:
+                "200":
+                    description: Succès
+    /ambula/stop:
+        post:
+            summary: Arrête la blockchain Ambula
+            responses:
+                "200":
+                    description: Succès
+    /ambula/nodes:
+        post:
+            summary: Ajoute un nouveau nœud à la blockchain Ambula
+            responses:
+                "200":
+                    description: Succès
+    /ambula/nodes/{node_id}/reboot:
+        post:
+            summary: Redémarre un nœud spécifique de la blockchain Ambula
+            parameters:
+                - name: node_id
+                  in: path
+                  required: true
+                  description: ID du nœud
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succès
+    /ambula/nodes/{node_id}:
+        delete:
+            summary: Supprime un nœud spécifique de la blockchain Ambula
+            parameters:
+                - name: node_id
+                  in: path
+                  required: true
+                  description: ID du nœud
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succès
+    /activities/:
+        get:
+            summary: Récupère la liste des activités
+            responses:
+                "200":
+                    description: Succès
+        post:
+            summary: Insère une nouvelle activité
+            responses:
+                "200":
+                    description: Succès

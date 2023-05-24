@@ -1,0 +1,67 @@
+# Ambula Admin API Readme
+
+L'API Ambula Admin est une API de backend conçue pour créer un backoffice pour la blockchain Ambula. Elle sert d'interface administrative pour gérer différents aspects de la blockchain Ambula et est intégrée avec le frontend Ambula Explorer.
+
+## Routes
+
+L'API Ambula Admin propose les routes suivantes :
+
+### Nodes
+
+-   `GET /nodes/` : Récupère la liste des nœuds.  
+     Contrôleur : `listingNodeController`
+
+-   `POST /nodes/` : Insère un nouveau nœud.  
+     Contrôleur : `insertNodeController`
+
+-   `GET /nodes/:node_id` : Récupère des informations sur un nœud spécifique.  
+     Contrôleur : `getNodeController`
+
+-   `PUT /nodes/:node_id` : Met à jour les informations d'un nœud spécifique.  
+     Contrôleur : `updateNodeController`
+
+-   `DELETE /nodes/:node_id` : Supprime un nœud spécifique.  
+     Contrôleur : `deleteNodeController`
+
+### Chain Infos
+
+-   `GET /chain-infos/` : Récupère des informations sur la blockchain.  
+     Contrôleur : `getChainInfosController`
+
+-   `PUT /chain-infos/` : Met à jour des informations sur la blockchain.  
+     Contrôleur : `updateChainInfosController`
+
+### Ambula
+
+-   `POST /ambula/start` : Lance la blockchain Ambula.  
+     Contrôleur : `startAmbulaController`
+
+-   `POST /ambula/stop` : Arrête la blockchain Ambula.  
+     Contrôleur : `stopAmbulaController`
+
+-   `POST /ambula/nodes` : Ajoute un nouveau nœud à la blockchain Ambula.  
+     Contrôleur : `addAmbulaNodeController`
+
+-   `POST /ambula/nodes/:node_id/reboot` : Redémarre un nœud spécifique de la blockchain Ambula.  
+     Contrôleur : `rebootAmbulaNodeController`
+
+-   `DELETE /ambula/nodes/:node_id` : Supprime un nœud spécifique de la blockchain Ambula.  
+     Contrôleur : `deleteAmbulaNodeController`
+
+### Activities
+
+-   `GET /activities/` : Récupère la liste des activités.  
+     Contrôleur : `listingActivitiesController`
+
+-   `POST /activities/` : Insère une nouvelle activité.  
+     Contrôleur : `insertActivityController`
+
+## Pour commencer
+
+Pour commencer avec l'API Ambula Admin, suivez ces étapes :
+
+1. Clonez le dépôt du projet Ambula Admin API.
+2. Installez les dépendances requises en utilisant `npm install`.
+3. Lancez le serveur API en utilisant `npm start`.
+
+Assurez-vous d'avoir une version compatible de Node.js installée sur votre machine.
