@@ -36,7 +36,7 @@ async function handle() {
 	}
 
 	const ipResult = await createLinode(result);
-	await delay(20000);
+	await delay(60000);
 	await executeLinode(result, ipResult);
 
 	var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
