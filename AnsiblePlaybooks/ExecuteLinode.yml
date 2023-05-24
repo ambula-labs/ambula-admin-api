@@ -65,7 +65,7 @@
 
       - name: Send logs to the WebSocket
         ansible.builtin.shell:
-            cmd: websocketd --port=8080 --timeout=0 docker logs -f ambula
+            cmd: websocketd --port=8080 docker logs -f ambula
         async: 300
         poll: 0
         become: yes
