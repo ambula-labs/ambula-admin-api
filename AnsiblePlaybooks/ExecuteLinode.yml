@@ -1,0 +1,72 @@
+- name: SSH KEYGEN
+  hosts: localhost
+  gather_facts: false
+  tasks:
+      - name: SSH cache
+        ansible.builtin.shell:
+            cmd: ssh-keygen -R "{{ linode_ip }}"
+        become: yes
+        become_user: root
+
+- name: Connect to remote machine via SSH and perform actions
+  hosts: all
+  gather_facts: false
+  vars:
+      ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+  tasks:
+      - name: Update package cache
+        apt:
+            update_cache: yes
+        become: true
+        become_method: sudo
+
+      - name: Install Websocketd
+        apt:
+            name: websocketd
+            state: present
+        become: true
+        become_method: sudo
+
+      - name: Install Docker
+        apt:
+            name: docker.io
+            state: present
+        become: true
+        become_method: sudo
+
+      - name: Pull Ambula Docker image
+        shell: docker pull ambula/node:latest
+        become: true
+        become_method: sudo
+
+      - name: Start the master node
+        ansible.builtin.shell:
+            cmd: docker run -d -p 9933:9933 --name ambula ambula/node --dev --base-path /tmp/a --port=30335 --ws-port 9945 --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external
+        async: 300
+        poll: 0
+        become: yes
+        become_user: root
+        when: name == "Alice"
+
+      - name: Start the following node
+        ansible.builtin.shell:
+            cmd: docker run -d -p 9933:9933 --name ambula ambula/node --dev --base-path /tmp/a --port=30335 --ws-port 9945 --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external --bootnodes /ip4/{{ alice_ip }}/tcp/30334/p2p/12D3KooWH2J2Z2UKNriZ6oNRuL9DQRkNWsZAGRW8QzTvyL2jy5f9
+        async: 300
+        poll: 0
+        become: yes
+        become_user: root
+        when: name != "Alice"
+
+      - name: Start docker Ambula
+        ansible.builtin.shell:
+            cmd: docker start ambula
+        become: yes
+        become_user: root
+
+      - name: Send logs to the WebSocket
+        ansible.builtin.shell:
+            cmd: websocketd --port=8080 sh -c "docker logs -f ambula 2>&1"
+        async: 300
+        poll: 0
+        become: yes
+        become_user: root

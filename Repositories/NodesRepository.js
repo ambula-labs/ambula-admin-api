@@ -20,6 +20,15 @@ export default async function listingNodes(req) {
 	}
 }
 
+export async function getNodesNames() {
+	try {
+		const sql = "SELECT name FROM nodes";
+		return await query(sql);
+	} catch (err) {
+		throw new Error(`Failed to get nodes names from the database: ${err}`);
+	}
+}
+
 export async function getNode(id) {
 	try {
 		const sql = `SELECT * FROM nodes WHERE id = '${id}'`;
@@ -27,6 +36,25 @@ export async function getNode(id) {
 		return fromDatabaseResult(rows[0]);
 	} catch (err) {
 		throw new Error(`Failed to fetch node ${id} from the database: ${err}`);
+	}
+}
+
+export async function getNodeFromName(name) {
+	try {
+		const sql = `SELECT * FROM nodes WHERE name = '${name}'`;
+		const rows = await query(sql);
+		return fromDatabaseResult(rows[0]);
+	} catch (err) {
+		throw new Error(`Failed to fetch node ${name} : ${err}`);
+	}
+}
+
+export async function getLastIdInNodes() {
+	try {
+		const sql = "SELECT id FROM nodes ORDER BY id DESC LIMIT 1";
+		return await query(sql)[0];
+	} catch (err) {
+		throw new Error(`Failed to get last Id node from the database: ${err}`);
 	}
 }
 
@@ -62,5 +90,14 @@ export async function deleteNode(id) {
 		await query(sql);
 	} catch (err) {
 		throw new Error(`Failed to delete node ${id} : ${err}`);
+	}
+}
+
+export async function deleteNodeFromName(name) {
+	try {
+		const sql = `DELETE FROM nodes WHERE name = '${name}'`;
+		await query(sql);
+	} catch (err) {
+		throw new Error(`Failed to delete node ${name} : ${err}`);
 	}
 }
