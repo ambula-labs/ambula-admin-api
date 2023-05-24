@@ -19,8 +19,8 @@ async function handle() {
 
 	for (let i = 0; i < predefinedName.length; i++) {
 		let isInside = false;
-		for (let i = 0; i < nodeNames.length; i++) {
-			if (predefinedName[i] === nodeNames[i].name) {
+		for (let j = 0; j < nodeNames.length; j++) {
+			if (predefinedName[i] === nodeNames[j].name) {
 				isInside = true;
 			}
 		}
@@ -38,7 +38,7 @@ async function handle() {
 	const ipResult = await createLinode(result);
 	await delay(60000);
 	const ipAlice = await getNodeFromName("Alice");
-	await executeLinode(result, ipResult, ipAlice);
+	await executeLinode(result, ipResult, ipAlice.ip);
 
 	var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
 	await insertNodeService(insertRequest);
