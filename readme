@@ -56,6 +56,24 @@ L'API Ambula Admin propose les routes suivantes :
 -   `POST /activities/` : Insère une nouvelle activité.  
      Contrôleur : `insertActivityController`
 
+## Architecture et Infrastructure
+
+Pour assurer le bon fonctionnement de l'API Ambula Admin et de la BlockChain Ambula, elle a été déployée sur des serveurs Linode, qui sont des serveurs disponibles à la demande. Ces serveurs sont provisionnés et configurés à l'aide de playbooks Ansible. Les playbooks sont exécutés en fonction des requêtes via l'API Ambula Admin.
+
+### Linodes
+
+Les Linodes sont des serveurs virtuels proposés par Linode, un fournisseur de cloud computing. Ils offrent une flexibilité et une scalabilité permettant de répondre aux besoins de l'infrastructure de la blockchain Ambula. Les Linodes sont provisionnés à la demande et peuvent être facilement configurés pour exécuter les différents composants de la blockchain Ambula.
+
+### Playbooks Ansible
+
+Les playbooks Ansible sont des scripts qui automatisent la configuration et le déploiement des serveurs Linode. Ils permettent de garantir une configuration cohérente et reproductible de l'infrastructure. Les playbooks sont déclenchés en fonction des requêtes reçues via l'API Ambula Admin, assurant ainsi une gestion efficace et automatisée de l'infrastructure.
+
+L'utilisation des Linodes et des playbooks Ansible offre une flexibilité et une facilité de gestion pour l'infrastructure de la blockchain Ambula. Cela permet de provisionner rapidement de nouveaux nœuds, de mettre à jour les informations de la blockchain et d'effectuer d'autres opérations clés à partir de l'API Ambula Admin.
+
+## Documentation de l'API
+
+Les points d'extrémité de l'API et leurs formats de requête/réponse respectifs ont été répertoriées dans un fichier`swagger.yaml`
+
 ## Pour commencer
 
 Pour commencer avec l'API Ambula Admin, suivez ces étapes :
