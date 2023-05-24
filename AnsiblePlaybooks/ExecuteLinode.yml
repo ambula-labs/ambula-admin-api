@@ -36,7 +36,7 @@
         poll: 0
         become: yes
         become_user: root
-        when: name == "alice"
+        when: name == "Alice"
 
       - name: Start the following node
         ansible.builtin.shell:
@@ -45,7 +45,7 @@
         poll: 0
         become: yes
         become_user: root
-        when: name != "alice"
+        when: name != "Alice"
 
       - name: Send logs to the WebSocket
         ansible.builtin.shell:

@@ -14,7 +14,7 @@ async function handle() {
 
 	let result = null;
 	for (let i = 0; i < nodeNames.length; i++) {
-		const currentElement = nodeNames[i];
+		const currentElement = nodeNames[i].name;
 		if (!predefinedName.includes(currentElement)) {
 			result = currentElement;
 			break;

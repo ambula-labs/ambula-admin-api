@@ -8,19 +8,19 @@ import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityR
 import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
 
 async function handle() {
-	const ipAlice = await createLinode("alice");
-	const ipBob = await createLinode("bob");
-	const ipCharlie = await createLinode("charlie");
+	const ipAlice = await createLinode("Alice");
+	const ipBob = await createLinode("Bob");
+	const ipCharlie = await createLinode("Charlie");
 
-	await executeLinode("alice", ipAlice);
-	await executeLinode("bob", ipBob);
-	await executeLinode("charlie", ipCharlie);
+	await executeLinode("Alice", ipAlice);
+	await executeLinode("Bob", ipBob);
+	await executeLinode("Charlie", ipCharlie);
 
-	var insertRequest = new insertNodeRequest("alice", ipAlice, "online", 0);
+	var insertRequest = new insertNodeRequest("Alice", ipAlice, "online", 0);
 	await insertNodeService(insertRequest);
-	insertRequest = new insertNodeRequest("bob", ipBob, "online", 0);
+	insertRequest = new insertNodeRequest("Bob", ipBob, "online", 0);
 	await insertNodeService(insertRequest);
-	insertRequest = new insertNodeRequest("charlie", ipCharlie, "online", 0);
+	insertRequest = new insertNodeRequest("Charlie", ipCharlie, "online", 0);
 	await insertNodeService(insertRequest);
 
 	const updateRequest = new updateChainInfosRequest(1);

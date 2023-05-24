@@ -6,12 +6,12 @@ import insertActivityService from "../../Activity/InsertActivity/InsertActivityS
 import { deleteNodeFromName } from "../../../Repositories/NodesRepository.js";
 
 async function handle() {
-	await deleteLinode("alice");
-	await deleteLinode("bob");
-	await deleteLinode("charlie");
-	await deleteNodeFromName("alice");
-	await deleteNodeFromName("bob");
-	await deleteNodeFromName("charlie");
+	await deleteLinode("Alice");
+	await deleteLinode("Bob");
+	await deleteLinode("Charlie");
+	await deleteNodeFromName("Alice");
+	await deleteNodeFromName("Bob");
+	await deleteNodeFromName("Charlie");
 
 	const updateRequest = new updateChainInfosRequest(0);
 	await updateChainInfosService(updateRequest);
