@@ -10,59 +10,12 @@
         become: true
         become_method: sudo
 
-      - name: Install Git
+      - name: Install Websocketd
         apt:
-            name: git
+            name: websocketd
             state: present
         become: true
         become_method: sudo
-
-      - name: Download Node.js binary package
-        ansible.builtin.get_url:
-            url: "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz"
-            dest: "/tmp/node-v18.16.0-linux-x64.tar.xz"
-        become: yes
-
-      - name: Extract Node.js package
-        ansible.builtin.unarchive:
-            src: "/tmp/node-v18.16.0-linux-x64.tar.xz"
-            dest: "/usr/local"
-            remote_src: yes
-            extra_opts: "--strip-components=1"
-        become: yes
-
-      - name: Set Node.js environment variables
-        ansible.builtin.lineinfile:
-            path: /etc/profile.d/nodejs.sh
-            line: "export PATH=$PATH:/usr/local/bin"
-            create: yes
-        become: yes
-
-      - name: Install specific version of npm
-        ansible.builtin.command:
-            cmd: npm install -g npm
-        become: yes
-        become_user: root
-
-      - name: Clone the repository
-        ansible.builtin.git:
-            repo: "https://github.com/ambula-labs/ambula-shell-output-api.git"
-            dest: "/ambula-shell-output-api"
-            clone: yes
-            force: yes
-            version: main
-            accept_hostkey: yes
-            update: yes
-            depth: 1
-        become: yes
-        become_user: root # Change to root or another user with sufficient privileges
-
-      - name: Install npm dependencies
-        ansible.builtin.command:
-            cmd: npm install
-            chdir: /ambula-shell-output-api
-        become: yes
-        become_user: root
 
       - name: Install Docker
         apt:
@@ -71,21 +24,29 @@
         become: true
         become_method: sudo
 
-      - name: Pull Parity/Substrate Docker image
-        shell: docker pull parity/substrate
-        become: true
-        become_method: sudo
-
       - name: Pull Ambula Docker image
         shell: docker pull ambula/node:latest
         become: true
         become_method: sudo
 
-      - name: Start the application
+      - name: Start the master node
         ansible.builtin.shell:
-            cmd: npm start &
-            chdir: /ambula-shell-output-api
+            cmd: docker run -it --name ambula ambula/node --dev --base-path /tmp/a --port=30335 --ws-port 9945 --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external
         async: 300
         poll: 0
+        become: yes
+        become_user: root
+        when: name == "alice"
+
+      - name: Start the following node
+        ansible.builtin.shell:
+            cmd: docker run -it --name ambula ambula/node --dev --base-path /tmp/a --port=30335 --ws-port 9945 --ws-external --rpc-cors=all --rpc-methods=Unsafe --rpc-external --bootnodes /ip4/96.126.104.91/tcp/30334/p2p/12D3KooWH2J2Z2UKNriZ6oNRuL9DQRkNWsZAGRW8QzTvyL2jy5f9
+        become: yes
+        become_user: root
+        when: name != "alice"
+
+      - name: Send logs to the WebSocket
+        ansible.builtin.shell:
+            cmd: websocketd --port=8080 docker logs -f ambula
         become: yes
         become_user: root
