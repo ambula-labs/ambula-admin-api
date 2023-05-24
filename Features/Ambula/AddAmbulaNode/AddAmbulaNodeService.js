@@ -13,10 +13,16 @@ async function handle() {
 	const predefinedName = ["Charlie", "Dave", "Eve", "Ferdie"];
 
 	let result = null;
-	for (let i = 0; i < nodeNames.length; i++) {
-		const currentElement = nodeNames[i].name;
-		if (!predefinedName.includes(currentElement)) {
-			result = currentElement;
+
+	for (let i = 0; i < predefinedName.length; i++) {
+		let isInside = false;
+		for (let i = 0; i < nodeNames.length; i++) {
+			if (predefinedName[i] === nodeNames[i].name) {
+				isInside = true;
+			}
+		}
+		if (!isInside)) {
+			result = predefinedName[i];
 			break;
 		}
 	}
