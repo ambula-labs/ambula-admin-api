@@ -33,13 +33,14 @@ async function handle() {
 	}
 
 	const ipResult = await createLinode(result);
-	await executeLinode(result, ipResult);
+	setTimeout(async function () {
+		await executeLinode(result, ipResult);
+		var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
+		await insertNodeService(insertRequest);
 
-	var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
-	await insertNodeService(insertRequest);
-
-	const insertActRequest = new insertActivityRequest("Adding " + result + " node");
-	await insertActivityService(insertActRequest);
+		const insertActRequest = new insertActivityRequest("Adding " + result + " node");
+		await insertActivityService(insertActRequest);
+	}, 20000);
 }
 
 export default handle;
