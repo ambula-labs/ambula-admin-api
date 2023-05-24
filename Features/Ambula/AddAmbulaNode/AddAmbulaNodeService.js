@@ -6,7 +6,7 @@ import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityR
 import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
 import { getNodesNames, getLastIdInNodes } from "../../../Repositories/NodesRepository.js";
 
-async function handle(req) {
+async function handle() {
 	const nodeNames = await getNodesNames();
 	console.log(nodeNames);
 

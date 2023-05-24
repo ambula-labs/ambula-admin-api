@@ -1,7 +1,7 @@
 import handle from "./AddAmbulaNodeService.js";
 
 async function invoke(req, reply) {
-	await handle(req);
+	await handle();
 	reply.send(200);
 }
 

@@ -11,7 +11,7 @@ async function nodesRoute(fastify, options) {
 	fastify.post("/stop", async (request, reply) => {
 		await stopAmbulaController(request, reply);
 	});
-	fastify.post("/nodes/:node_id", async (request, reply) => {
+	fastify.post("/nodes", async (request, reply) => {
 		await addAmbulaNodeController(request, reply);
 	});
 	fastify.post("/nodes/:node_id/reboot", async (request, reply) => {
