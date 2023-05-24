@@ -6,6 +6,10 @@ import insertActivityRequest from "../../Activity/InsertActivity/InsertActivityR
 import insertActivityService from "../../Activity/InsertActivity/InsertActivityService.js";
 import { getNodesNames, getLastIdInNodes } from "../../../Repositories/NodesRepository.js";
 
+function delay(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function handle() {
 	const nodeNames = await getNodesNames();
 	console.log(nodeNames);
@@ -33,14 +37,14 @@ async function handle() {
 	}
 
 	const ipResult = await createLinode(result);
-	setTimeout(async function () {
-		await executeLinode(result, ipResult);
-		var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
-		await insertNodeService(insertRequest);
+	delay(20000);
+	await executeLinode(result, ipResult);
 
-		const insertActRequest = new insertActivityRequest("Adding " + result + " node");
-		await insertActivityService(insertActRequest);
-	}, 20000);
+	var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
+	await insertNodeService(insertRequest);
+
+	const insertActRequest = new insertActivityRequest("Adding " + result + " node");
+	await insertActivityService(insertActRequest);
 }
 
 export default handle;
