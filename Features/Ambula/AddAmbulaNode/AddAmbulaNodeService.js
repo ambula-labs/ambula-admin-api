@@ -21,7 +21,7 @@ async function handle() {
 				isInside = true;
 			}
 		}
-		if (!isInside)) {
+		if (!isInside) {
 			result = predefinedName[i];
 			break;
 		}
