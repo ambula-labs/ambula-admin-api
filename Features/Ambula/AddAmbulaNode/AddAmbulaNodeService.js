@@ -12,7 +12,6 @@ function delay(ms) {
 
 async function handle() {
 	const nodeNames = await getNodesNames();
-	console.log(nodeNames);
 
 	const predefinedName = ["Charlie", "Dave", "Eve", "Ferdie"];
 
@@ -37,7 +36,7 @@ async function handle() {
 	}
 
 	const ipResult = await createLinode(result);
-	delay(20000);
+	await delay(20000);
 	await executeLinode(result, ipResult);
 
 	var insertRequest = new insertNodeRequest(result, ipResult, "online", 0);
